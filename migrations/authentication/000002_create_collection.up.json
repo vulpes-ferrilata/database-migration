@@ -1,0 +1,32 @@
+[
+    {
+        "create": "user_credentials",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "user credential validation",
+                "required": ["_id", "email", "hash_password", "version"],
+                "properties": {
+                    "_id": {
+                        "bsonType": "objectId"
+                    },
+                    "user_id": {
+                        "bsonType": "objectId"
+                    },
+                    "email": {
+                        "bsonType": "string",
+                        "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+                    },
+                    "hash_password": {
+                        "bsonType": "binData"
+                    },
+                    "version": {
+                        "bsonType": "int",
+                        "minimum": 1
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+]

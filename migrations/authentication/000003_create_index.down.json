@@ -1,0 +1,6 @@
+[
+    {
+        "dropIndexes": "user_credentials",
+        "index": "email index"
+    }
+]
