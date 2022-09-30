@@ -1,6 +1,6 @@
 [
     {
-        "create": "user_credentials",
+        "create": "user_credential",
         "validator": {
             "$jsonSchema": {
                 "bsonType": "object",

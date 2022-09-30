@@ -1,6 +1,6 @@
 [
     {
-        "createIndexes": "user_credentials",
+        "createIndexes": "user_credential",
         "indexes": [
             {
                 "key": {

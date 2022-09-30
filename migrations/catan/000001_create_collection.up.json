@@ -1,6 +1,6 @@
 [
     {
-        "create": "games",
+        "create": "game",
         "validator": {
             "$jsonSchema": {
                 "bsonType": "object",
@@ -22,11 +22,168 @@
                         "bsonType": "int",
                         "minimum": 1
                     },
+					"active_player": {
+						"bsonType": "object",
+						"required": ["_id","user_id","turn_order", "color", "is_offered"],
+						"properties": {
+							"_id": {
+								"bsonType": "objectId"
+							},
+							"user_id": {
+								"bsonType": "objectId"
+							},
+							"turn_order": {
+								"bsonType": "int",
+								"minimum": 1,
+								"maximum": 4
+							},
+							"color": {
+								"bsonType": "string",
+								"enum": ["RED", "BLUE", "GREEN", "YELLOW"]
+							},
+							"is_offered": {
+								"bsonType": "bool"
+							},
+							"score": {
+								"bsonType": "int",
+								"minimum": 0
+							},
+							"achievements": {
+								"bsonType": "array",
+								"items": {
+									"bsonType": "object",
+									"required": ["_id", "type"],
+									"properties": {
+										"_id": {
+											"bsonType": "objectId"
+										},
+										"type": {
+											"bsonType": "string",
+											"enum": ["LARGEST_ARMY", "LONGEST_ROAD"]
+										}
+									},
+									"additionalProperties": false
+								}
+							},
+							"resource_cards": {
+								"bsonType": "array",
+								"items": {
+									"bsonType": "object",
+									"required": ["_id", "type", "is_selected"],
+									"properties": {
+										"_id": {
+											"bsonType": "objectId"
+										},
+										"type": {
+											"bsonType": "string",
+											"enum": ["LUMBER", "BRICK", "WOOL", "GRAIN", "ORE"]
+										},
+										"is_selected": {
+											"bsonType": "bool"
+										}
+									},
+									"additionalProperties": false
+								}
+							},
+							"development_cards": {
+								"bsonType": "array",
+								"items": {
+									"bsonType": "object",
+									"required": ["_id", "type", "status"],
+									"properties": {
+										"_id": {
+											"bsonType": "objectId"
+										},
+										"type": {
+											"bsonType": "string",
+											"enum": ["KNIGHT", "MONOPOLY", "ROAD_BUILDING", "YEAR_OF_PLENTY", "VICTORY_POINTS"]
+										},
+										"status": {
+											"bsonType": "string",
+											"enum": ["DISABLE", "ENABLE", "USED"]
+										}
+									},
+									"additionalProperties": false
+								}
+							},
+							"constructions": {
+								"bsonType": "array",
+								"items": {
+									"bsonType": "object",
+									"required": ["_id", "type"],
+									"properties": {
+										"_id": {
+											"bsonType": "objectId"
+										},
+										"type": {
+											"bsonType": "string",
+											"enum": ["SETTLEMENT", "CITY"]
+										},
+										"land": {
+											"bsonType": ["object", "null"],
+											"required": ["_id", "q", "r", "location"],
+											"properties": {
+												"_id": {
+													"bsonType": "objectId"
+												},
+												"q": {
+													"bsonType": "int"
+												},
+												"r": {
+													"bsonType": "int"
+												},
+												"location": {
+													"bsonType": "string",
+													"enum": ["TOP", "BOTTOM"]
+												}
+											},
+											"additionalProperties": false
+										}
+									},
+									"additionalProperties": false
+								}
+							},
+							"roads": {
+								"bsonType": "array",
+								"items": {
+									"bsonType": "object",
+									"required": ["_id"],
+									"properties": {
+										"_id": {
+											"bsonType": "objectId"
+										},
+										"path": {
+											"bsonType": ["object", "null"],
+											"required": ["_id", "q", "r", "location"],
+											"properties": {
+												"_id": {
+													"bsonType": "objectId"
+												},
+												"q": {
+													"bsonType": "int"
+												},
+												"r": {
+													"bsonType": "int"
+												},
+												"location": {
+													"bsonType": "string",
+													"enum": ["TOP_LEFT", "MIDDLE_LEFT", "BOTTOM_LEFT"]
+												}
+											},
+											"additionalProperties": false
+										}
+									},
+									"additionalProperties": false
+								}
+							}
+						},
+						"additionalProperties": false
+					},
                     "players": {
                         "bsonType": "array",
                         "items": {
                             "bsonType": "object",
-                            "required": ["_id","user_id","turn_order", "color", "is_active", "is_offered"],
+                            "required": ["_id","user_id","turn_order", "color", "is_offered"],
                             "properties": {
                                 "_id": {
                                     "bsonType": "objectId"
@@ -42,9 +199,6 @@
                                 "color": {
                                     "bsonType": "string",
                                     "enum": ["RED", "BLUE", "GREEN", "YELLOW"]
-                                },
-                                "is_active": {
-                                    "bsonType": "bool"
                                 },
                                 "is_offered": {
                                     "bsonType": "bool"

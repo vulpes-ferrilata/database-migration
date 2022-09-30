@@ -1,6 +1,6 @@
 [
     {
-        "create": "users",
+        "create": "user",
         "validator": {
             "$jsonSchema": {
                 "bsonType": "object",
